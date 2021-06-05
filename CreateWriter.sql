@@ -1,10 +1,10 @@
-Create Proc CreateWriter
-@Id uniqueidentifier,
+create proc CreateWriters(
 @Name nvarchar(50),
 @LastName nvarchar(50),
 @AddressId uniqueidentifier
-as
+) as 
 begin
-set @Id = newid();
+declare @Id uniqueidentifier;
+set @Id = NEWID();
 insert into Writers values(@Id,@Name,@LastName,@AddressId);
 end

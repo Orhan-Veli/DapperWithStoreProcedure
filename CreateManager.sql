@@ -1,11 +1,11 @@
-Create proc CreateManager
-@Id uniqueidentifier,
+create proc CreateManagers(
 @Name nvarchar(50),
 @LastName nvarchar(50),
 @LibraryId uniqueidentifier,
 @AddressId uniqueidentifier
-as
+)as
 begin
-set @Id = NEWID();
-insert into Managers values(@Id,@Name,@LastName,@LibraryId,@AddressId);
+Declare @Id uniqueidentifier
+set @Id = NEWID()
+insert into Managers values(@Id,@Name,@LastName,@LibraryId,@AddressId)
 end
