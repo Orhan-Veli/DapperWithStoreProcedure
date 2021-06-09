@@ -10,6 +10,7 @@ namespace LibraryDapperExample.Dal.Entity
         public District()
         {
             Libraries = new List<Library>();
+            Customers = new List<Customer>();
         }
         public Guid Id { get; set; }
 
@@ -18,5 +19,7 @@ namespace LibraryDapperExample.Dal.Entity
         public Guid CountyId { get; set; }
 
         public List<Library> Libraries { get; set; }
+
+        public List<Customer> Customers { get; set; }
     }
 }
