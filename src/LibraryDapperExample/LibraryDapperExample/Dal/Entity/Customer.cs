@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Dal.Entity
 {
-    public class Library
+    public class Customer
     {
-        public Library()
+        public Customer()
         {
             CustomerLibraryRelations = new List<CustomerLibraryRelation>();
         }
@@ -15,8 +15,10 @@ namespace LibraryDapperExample.Dal.Entity
 
         public string Name { get; set; }
 
+        public string LastName { get; set; }
+
         public Guid AddressId { get; set; }
 
-        public List<CustomerLibraryRelation> CustomerLibraryRelations { get; set; }
+        public List<CustomerLibraryRelation> CustomerLibraryRelations { get; set; } 
     }
 }
