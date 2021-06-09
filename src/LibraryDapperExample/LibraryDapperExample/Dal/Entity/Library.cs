@@ -5,18 +5,12 @@ using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Dal.Entity
 {
-    public class District
+    public class Library
     {
-        public District()
-        {
-            Libraries = new List<Library>();
-        }
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
-        public Guid CountyId { get; set; }
-
-        public List<Library> Libraries { get; set; }
+        public District AddressId { get; set; }
     }
 }
