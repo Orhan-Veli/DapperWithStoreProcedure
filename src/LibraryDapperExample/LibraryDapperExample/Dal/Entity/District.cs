@@ -11,6 +11,7 @@ namespace LibraryDapperExample.Dal.Entity
         {
             Libraries = new List<Library>();
             Customers = new List<Customer>();
+            Managers = new List<Manager>();
         }
         public Guid Id { get; set; }
 
@@ -21,5 +22,7 @@ namespace LibraryDapperExample.Dal.Entity
         public List<Library> Libraries { get; set; }
 
         public List<Customer> Customers { get; set; }
+
+        public List<Manager> Managers { get; set; }
     }
 }
