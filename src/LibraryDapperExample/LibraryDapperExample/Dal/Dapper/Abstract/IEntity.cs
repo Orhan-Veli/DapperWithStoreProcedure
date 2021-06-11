@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryDapperExample.Utilities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,12 +10,13 @@ namespace LibraryDapperExample.Dal.Dapper.Abstract
     {
         Task Create(T model);
 
-        Task<T> Get(Guid? Id);
+        Task<IResult<T>> Get(Guid Id);
 
-        Task<T> Update(T model);
+        Task Update(T model);
 
         Task Delete(Guid id);
 
+        Task<IResult<List<T>>> GetAll();
         
     }
 }

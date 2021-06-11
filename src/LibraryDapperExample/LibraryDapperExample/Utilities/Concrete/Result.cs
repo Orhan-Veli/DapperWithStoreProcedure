@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Utilities.Concrete
 {
-    public class Resutl<T> : IResult<T>
+    public class Result<T> : IResult<T>
     {
-        public Resutl(string message,bool success, T data ) 
+        public Result(string message,bool success, T data ) 
         {
             Message = message;
             success = Success;
             Data = data;
         }
 
-        public Resutl(string message,bool success)
+        public Result(string message,bool success)
         {
             Message = message;
             Success = success;
         }
 
-        public Resutl(bool success)
+        public Result(bool success)
         {
             Success = success;
         }
 
-        public Resutl(bool success,T data)
+        public Result(bool success,T data)
         {
             Success = success;
             Data = data;

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using LibraryDapperExample.Utilities.Abstract;
+using LibraryDapperExample.Utilities.Concrete;
 
 namespace LibraryDapperExample.Dal.Dapper.Concrete
 {
@@ -15,36 +17,30 @@ namespace LibraryDapperExample.Dal.Dapper.Concrete
         {
             _configuration = configuration;
         }
-        public async Task Create(T model)
+
+        public Task Create(T model)
         {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-            {
-                connection.Open();
-            }
+            throw new NotImplementedException();
         }
 
-        public async Task Delete(Guid id)
+        public Task Delete(Guid id)
         {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-            {
-                connection.Open();
-            }
+            throw new NotImplementedException();
         }
 
-        public async Task<T> Get(Guid? Id)
+        public Task<IResult<T>> Get(Guid Id)
         {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-            {
-                connection.Open();
-            }
+            throw new NotImplementedException();
         }
 
-        public async Task<T> Update(T model)
+        public Task<IResult<List<T>>> GetAll()
         {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-            {
-                connection.Open();
-            }
+            throw new NotImplementedException();
+        }
+
+        public Task Update(T model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

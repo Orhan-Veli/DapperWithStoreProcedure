@@ -18,6 +18,8 @@ namespace LibraryDapperExample.Dal.Entity
 
         public Guid WriterId { get; set; }
 
+        public List<Category> CategoryIds { get; set; }
+        public List<Library> LibraryIds { get; set; }
         public List<CategoryBookRelation> CategoryBookRelations { get; set; }
     }
 }
