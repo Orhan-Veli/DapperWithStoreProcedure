@@ -9,7 +9,7 @@ namespace LibraryDapperExample.Dal.Entity
     {
         public Book()
         {
-            CategoryBookRelation = new List<CategoryBookRelation>();
+            CategoryBookRelations = new List<CategoryBookRelation>();
         }
 
         public Guid Id { get; set; }
