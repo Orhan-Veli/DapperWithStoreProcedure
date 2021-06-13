@@ -27,6 +27,13 @@ namespace LibraryDapperExample.Business.Concrete
             var allBooks = await _mediator.Send(requestModel);
             return new Result<List<GetAllBookQueryResponse>>(true,allBooks);
         }
+
+        public async Task<IResult<GetBookByIdQueryResponse>> GetById(GetByBookIdQueryRequest requestModel)
+        {
+            if (requestModel.Id == Guid.Empty) return new Result<GetBookByIdQueryResponse>(false);
+            var book = await _mediator.Send(requestModel);
+            return new Result<GetBookByIdQueryResponse>(true,book);
+        }
         //public async Task<IResult<object>> Create(Book model)
         //{
         //    if (

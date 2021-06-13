@@ -38,8 +38,8 @@ namespace LibraryDapperExample
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
             services.AddTransient<CreateBookCommandHandler>();
             services.AddTransient<GetAllBookQueryHandler>();
-            services.AddSingleton<IBookService, BookService>();
-            
+            services.AddTransient<GetBookByIdQueryHandler>();
+            services.AddSingleton<IBookService, BookService>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

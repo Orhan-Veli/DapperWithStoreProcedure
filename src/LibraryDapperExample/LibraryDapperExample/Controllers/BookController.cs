@@ -24,10 +24,19 @@ namespace LibraryDapperExample.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GetAllBookQueryResponse>>> GetAll([FromQuery]GetAllBookQueryRequest request)
+        public async Task<ActionResult> GetAll([FromQuery] GetAllBookQueryRequest request)
         {
             var results = _bookService.GetAll(request);
             return Ok(results);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(Guid id)
+        {
+            GetByBookIdQueryRequest request = new GetByBookIdQueryRequest { Id = id };
+            if (request.Id == Guid.Empty) return BadRequest();
+            var result = _bookService.GetById(request);
+            return Ok(result);
         }
 
         //[HttpGet("{id}")]

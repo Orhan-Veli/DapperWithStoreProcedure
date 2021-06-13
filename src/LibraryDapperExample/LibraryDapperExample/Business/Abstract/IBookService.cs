@@ -13,5 +13,7 @@ namespace LibraryDapperExample.Business.Abstract
     {
         
         Task<IResult<List<GetAllBookQueryResponse>>> GetAll(GetAllBookQueryRequest requestModel);
+
+        Task<IResult<GetBookByIdQueryResponse>> GetById(GetByBookIdQueryRequest requestModel);
     }
 }
