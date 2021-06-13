@@ -15,27 +15,34 @@ using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Handlers.Command
 {
-    public class CreateBookCommandHandler : ICommandRequestHandler<CreateBookCommandRequest,CreateBookCommandResponse>
+    public class CreateBookCommandHandler : ICommandRequestHandler<CreateBookCommandRequest, CreateBookCommandResponse>
     {
         private readonly IConfiguration _configuration;
         public CreateBookCommandHandler(IConfiguration configuration)
         {
             _configuration = configuration;
-        }      
+        }
 
-        public async  Task<CreateBookCommandResponse> Handle(CreateBookCommandRequest request, CancellationToken cancellationToken)
+        public async Task<CreateBookCommandResponse> Handle(CreateBookCommandRequest request, CancellationToken cancellationToken)
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@Name", request.Name);
-                parameters.Add("@WriterId", request.WriterId);
-                parameters.Add("@CategoryIds", request.CategoryIds);
-                parameters.Add("@LibraryIds", request.LibraryIds);
-                await connection.ExecuteAsync("CreateBooks", parameters, commandType: CommandType.StoredProcedure);
+                var categoryTable = new DataTable();
+                categoryTable.Columns.Add("Item", typeof(Guid));
+                request.CategoryIds.ForEach(x => categoryTable.Rows.Add(x));
+                var libraryTable = new DataTable();
+                libraryTable.Columns.Add("Item", typeof(Guid));
+                request.LibraryIds.ForEach(t => libraryTable.Rows.Add(t));
+
+                await connection.ExecuteAsync("CreateBooks", new[] {
+
+                    new{ Name = request.Name, WriterId = request.WriterId, CategoryIds = categoryTable , LibraryIds = libraryTable }
+
+                    }, commandType: CommandType.StoredProcedure);
+
                 connection.Close();
-                return new CreateBookCommandResponse() { Success=true };
+                return new CreateBookCommandResponse() { Success = true };
             }
         }
     }

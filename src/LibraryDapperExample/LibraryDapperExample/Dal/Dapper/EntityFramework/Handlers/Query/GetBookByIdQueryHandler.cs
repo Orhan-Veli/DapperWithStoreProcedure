@@ -25,7 +25,7 @@ namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Handlers.Query
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Id", request.Id);
-                GetBookByIdQueryResponse book = connection.Query<GetBookByIdQueryResponse>("GetBook", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                GetBookByIdQueryResponse book = connection.QueryFirstOrDefault<GetBookByIdQueryResponse>("GetBook", parameters, commandType: CommandType.StoredProcedure);
                 connection.Close();
                 return book;
             }

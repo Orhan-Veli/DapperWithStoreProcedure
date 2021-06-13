@@ -1,4 +1,5 @@
 ﻿using LibraryDapperExample.Business.Abstract;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Response;
 using LibraryDapperExample.Dal.Entity;
@@ -39,6 +40,13 @@ namespace LibraryDapperExample.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateBookCommandRequest request)
+        {
+            await _bookService.Create(request);
+            return Ok();
+        }
+
         //[HttpGet("{id}")]
         //public async Task<IActionResult> Get(Guid id)
         //{
@@ -56,14 +64,7 @@ namespace LibraryDapperExample.Controllers
         //    return NoContent();
         //}
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create([FromBody]BookModel book)
-        //{
-        //    if (!ModelState.IsValid) return BadRequest();
-        //    var resultBook = book.Adapt<Book>();
-        //    await _bookService.Create(resultBook);
-        //    return Ok();
-        //}
+
 
         //[HttpPut]
         //public async Task<IActionResult> Update([FromBody]BookModel book)

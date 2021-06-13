@@ -1,4 +1,5 @@
-﻿using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
+﻿using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Response;
 using LibraryDapperExample.Dal.Entity;
 using LibraryDapperExample.Utilities.Abstract;
@@ -15,5 +16,7 @@ namespace LibraryDapperExample.Business.Abstract
         Task<IResult<List<GetAllBookQueryResponse>>> GetAll(GetAllBookQueryRequest requestModel);
 
         Task<IResult<GetBookByIdQueryResponse>> GetById(GetByBookIdQueryRequest requestModel);
+
+        Task<IResult<object>> Create(CreateBookCommandRequest model);
     }
 }

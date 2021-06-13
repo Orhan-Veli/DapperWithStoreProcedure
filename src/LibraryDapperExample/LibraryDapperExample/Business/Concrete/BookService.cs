@@ -1,6 +1,7 @@
 ﻿using LibraryDapperExample.Business.Abstract;
 using LibraryDapperExample.Constants;
 using LibraryDapperExample.Dal.Dapper.Abstract;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Response;
 using LibraryDapperExample.Dal.Entity;
@@ -34,19 +35,18 @@ namespace LibraryDapperExample.Business.Concrete
             var book = await _mediator.Send(requestModel);
             return new Result<GetBookByIdQueryResponse>(true,book);
         }
-        //public async Task<IResult<object>> Create(Book model)
-        //{
-        //    if (
-        //       model == null ||
-        //       model.Id == Guid.Empty ||
-        //       string.IsNullOrEmpty(model.Name) ||
-        //       model.WriterId == Guid.Empty ||
-        //       model.CategoryIds.Count == 0 ||
-        //       model.LibraryIds.Count == 0
-        //       ) return new Result<object>(false, Messages.ModelNotValid);
-        //    await _entity.Create(model);
-        //    return new Result<object>(true);
-        //}
+        public async Task<IResult<object>> Create(CreateBookCommandRequest model)
+        {
+            if (
+               model == null ||
+               string.IsNullOrEmpty(model.Name) ||
+               model.WriterId == Guid.Empty ||
+               model.CategoryIds.Count == 0 ||
+               model.LibraryIds.Count == 0
+               ) return new Result<object>(false, Messages.ModelNotValid);
+            await _mediator.Send(model);
+            return new Result<object>(true);
+        }
 
         //public async Task<IResult<object>> Delete(Guid id)
         //{

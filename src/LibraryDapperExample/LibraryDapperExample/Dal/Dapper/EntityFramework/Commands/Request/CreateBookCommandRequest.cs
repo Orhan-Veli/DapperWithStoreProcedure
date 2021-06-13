@@ -12,8 +12,8 @@ namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request
     {
         public string Name { get; set; }
         public Guid WriterId { get; set; }
-        public List<Category> CategoryIds { get; set; }
-
-        public List<Library> LibraryIds { get; set; }
+        public List<Guid> CategoryIds { get; set; }
+        
+        public List<Guid> LibraryIds { get; set; }
     }
 }
