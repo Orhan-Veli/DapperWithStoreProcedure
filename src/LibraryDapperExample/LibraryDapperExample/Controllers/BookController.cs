@@ -37,13 +37,15 @@ namespace LibraryDapperExample.Controllers
             GetByBookIdQueryRequest request = new GetByBookIdQueryRequest { Id = id };
             if (request.Id == Guid.Empty) return BadRequest();
             var result = _bookService.GetById(request);
+            if (result.IsFaulted) return BadRequest();
             return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateBookCommandRequest request)
         {
-            await _bookService.Create(request);
+            var result = await _bookService.Create(request);
+            if (!result.Success) return BadRequest();
             return Ok();
         }                 
 
@@ -52,17 +54,18 @@ namespace LibraryDapperExample.Controllers
         {
             if (id == Guid.Empty) return NotFound();
             DeleteBookCommandRequest bookCommandRequest = new DeleteBookCommandRequest { Id = id };
-            await _bookService.Delete(bookCommandRequest);
+            var isDeleted = await _bookService.Delete(bookCommandRequest);
+            if (!isDeleted.Success) return BadRequest();
             return NoContent();
         }
 
-        //[HttpPut]
-        //public async Task<IActionResult> Update([FromBody]BookModel book)
-        //{
-        //    if (!ModelState.IsValid) return BadRequest();
-        //    var resultBook = book.Adapt<Book>();
-        //    return Ok();
-        //}
-
+        [HttpPut]
+        public async Task<IActionResult> Update([FromQuery] UpdateBookCommandRequest request)
+        {
+            if (request == null || request.BookId == Guid.Empty) return BadRequest();
+            var isUpdated = await _bookService.Update(request);
+            if (!isUpdated.Success) return BadRequest();
+            return Ok();
+        }
     }
 }

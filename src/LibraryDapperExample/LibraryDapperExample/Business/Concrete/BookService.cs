@@ -2,6 +2,7 @@
 using LibraryDapperExample.Constants;
 using LibraryDapperExample.Dal.Dapper.Abstract;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Response;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Response;
 using LibraryDapperExample.Dal.Entity;
@@ -35,7 +36,7 @@ namespace LibraryDapperExample.Business.Concrete
             var book = await _mediator.Send(requestModel);
             return new Result<GetBookByIdQueryResponse>(true,book);
         }
-        public async Task<IResult<object>> Create(CreateBookCommandRequest requestModel)
+        public async Task<IResult<CreateBookCommandResponse>> Create(CreateBookCommandRequest requestModel)
         {
             if (
                requestModel == null ||
@@ -43,39 +44,28 @@ namespace LibraryDapperExample.Business.Concrete
                requestModel.WriterId == Guid.Empty ||
                requestModel.CategoryIds.Count == 0 ||
                requestModel.LibraryIds.Count == 0
-               ) return new Result<object>(false, Messages.ModelNotValid);
+               ) return new Result<CreateBookCommandResponse>(false);
             await _mediator.Send(requestModel);
-            return new Result<object>(true);
+            return new Result<CreateBookCommandResponse>(true);
         }
 
-        public async Task<IResult<bool>> Delete(DeleteBookCommandRequest requestModel)
+        public async Task<IResult<DeleteBookCommandResponse>> Delete(DeleteBookCommandRequest requestModel)
         {
-            if (requestModel.Id == Guid.Empty) return new Result<bool>(false);
+            if (requestModel.Id == Guid.Empty) return new Result<DeleteBookCommandResponse>(false);
             await _mediator.Send(requestModel);
-            return new Result<bool>(true);
+            return new Result<DeleteBookCommandResponse>(true);
+        }    
+
+        public async Task<IResult<UpdateBookCommandResponse>> Update(UpdateBookCommandRequest requestModel)
+        {
+            if (
+                requestModel == null ||
+                requestModel.BookId== Guid.Empty ||
+                string.IsNullOrEmpty(requestModel.BookName) &&
+                requestModel.WriterId == Guid.Empty              
+                ) return new Result<UpdateBookCommandResponse>(false);
+            await _mediator.Send(requestModel);
+            return new Result<UpdateBookCommandResponse>(true);
         }
-
-        //public async Task<IResult<Book>> Get(Guid id)
-        //{
-        //    if (id == Guid.Empty) return new Result<Book>(Messages.IdIsNotValid, false);
-        //    var result = await _entity.Get(id);
-        //    if (!result.Success || result.Data == null) return new Result<Book>(false);
-        //    return new Result<Book>(true,result.Data);
-        //}
-
-
-        //public async Task<IResult<object>> Update(Book model)
-        //{
-        //    if (
-        //        model == null ||
-        //        model.Id == Guid.Empty ||
-        //        string.IsNullOrEmpty(model.Name) ||
-        //        model.WriterId == Guid.Empty ||
-        //        model.CategoryIds.Count == 0 ||
-        //        model.LibraryIds.Count == 0
-        //        ) return new Result<object>(false, Messages.ModelNotValid);
-        //    await _entity.Update(model);
-        //    return new Result<object>(true);
-        //}
     }
 }
