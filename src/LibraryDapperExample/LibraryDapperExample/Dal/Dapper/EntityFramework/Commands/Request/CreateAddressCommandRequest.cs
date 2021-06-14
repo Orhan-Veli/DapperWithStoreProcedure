@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request
 {
-    public class CreateBookCommandRequest : ICommandRequest<CreateBookCommandResponse>
+    public class CreateAddressCommandRequest : ICommandRequest<CreateAddressCommandResponse>
     {
-        public string Name { get; set; }
-        public Guid WriterId { get; set; }
-        public List<Guid> CategoryIds { get; set; }
-        
-        public List<Guid> LibraryIds { get; set; }
+        public string CountryName { get; set; }
+
+        public string StateName { get; set; }
+
+        public string CountyName { get; set; }
+
+        public string DistrictName { get; set; }
     }
 }

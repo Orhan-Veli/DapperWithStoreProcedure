@@ -1,11 +1,8 @@
 ﻿using LibraryDapperExample.Business.Abstract;
-using LibraryDapperExample.Constants;
-using LibraryDapperExample.Dal.Dapper.Abstract;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Response;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Response;
-using LibraryDapperExample.Dal.Entity;
 using LibraryDapperExample.Utilities.Abstract;
 using LibraryDapperExample.Utilities.Concrete;
 using MediatR;
