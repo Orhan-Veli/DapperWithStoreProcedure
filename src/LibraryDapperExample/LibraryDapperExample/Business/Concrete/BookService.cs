@@ -35,25 +35,25 @@ namespace LibraryDapperExample.Business.Concrete
             var book = await _mediator.Send(requestModel);
             return new Result<GetBookByIdQueryResponse>(true,book);
         }
-        public async Task<IResult<object>> Create(CreateBookCommandRequest model)
+        public async Task<IResult<object>> Create(CreateBookCommandRequest requestModel)
         {
             if (
-               model == null ||
-               string.IsNullOrEmpty(model.Name) ||
-               model.WriterId == Guid.Empty ||
-               model.CategoryIds.Count == 0 ||
-               model.LibraryIds.Count == 0
+               requestModel == null ||
+               string.IsNullOrEmpty(requestModel.Name) ||
+               requestModel.WriterId == Guid.Empty ||
+               requestModel.CategoryIds.Count == 0 ||
+               requestModel.LibraryIds.Count == 0
                ) return new Result<object>(false, Messages.ModelNotValid);
-            await _mediator.Send(model);
+            await _mediator.Send(requestModel);
             return new Result<object>(true);
         }
 
-        //public async Task<IResult<object>> Delete(Guid id)
-        //{
-        //    if (id == Guid.Empty) return new Result<object>(false);
-        //    await _entity.Delete(id);
-        //    return new Result<object>(true);
-        //}
+        public async Task<IResult<bool>> Delete(DeleteBookCommandRequest requestModel)
+        {
+            if (requestModel.Id == Guid.Empty) return new Result<bool>(false);
+            await _mediator.Send(requestModel);
+            return new Result<bool>(true);
+        }
 
         //public async Task<IResult<Book>> Get(Guid id)
         //{

@@ -45,26 +45,16 @@ namespace LibraryDapperExample.Controllers
         {
             await _bookService.Create(request);
             return Ok();
+        }                 
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (id == Guid.Empty) return NotFound();
+            DeleteBookCommandRequest bookCommandRequest = new DeleteBookCommandRequest { Id = id };
+            await _bookService.Delete(bookCommandRequest);
+            return NoContent();
         }
-
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> Get(Guid id)
-        //{
-        //    if (id == Guid.Empty) return BadRequest();
-        //    var result = await _bookService.Get(id);
-        //    if (!result.Success || result.Data == null) return NotFound();
-        //    return Ok(result.Data);
-        //}      
-
-        //[HttpDelete]
-        //public async Task<IActionResult> Delete(Guid id)
-        //{
-        //    if (id == Guid.Empty) return NotFound();
-        //    await _bookService.Delete(id);
-        //    return NoContent();
-        //}
-
-
 
         //[HttpPut]
         //public async Task<IActionResult> Update([FromBody]BookModel book)

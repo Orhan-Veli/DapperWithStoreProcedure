@@ -17,6 +17,8 @@ namespace LibraryDapperExample.Business.Abstract
 
         Task<IResult<GetBookByIdQueryResponse>> GetById(GetByBookIdQueryRequest requestModel);
 
-        Task<IResult<object>> Create(CreateBookCommandRequest model);
+        Task<IResult<object>> Create(CreateBookCommandRequest requestModel);
+
+        Task<IResult<bool>> Delete(DeleteBookCommandRequest requestModel);
     }
 }
