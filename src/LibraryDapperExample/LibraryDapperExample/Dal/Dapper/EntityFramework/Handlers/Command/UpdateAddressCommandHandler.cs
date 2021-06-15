@@ -22,6 +22,7 @@ namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Handlers.Command
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
+                connection.Open();
                 DynamicParameters parameter = new DynamicParameters();
                 parameter.Add("@CountryId", request.CountryId);
                 parameter.Add("@CountryName", request.CountryName);
@@ -32,6 +33,7 @@ namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Handlers.Command
                 parameter.Add("@DistrictId", request.DistrictId);
                 parameter.Add("@DistrictName", request.DistrictName);
                 await connection.ExecuteAsync("UpdateAddress", parameter, commandType:CommandType.StoredProcedure);
+                connection.Close();
                 return new UpdateAddressCommandResponse { Success = true };
             }
         }

@@ -21,13 +21,15 @@ namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Handlers.Query
         public async Task<List<GetAllAddressQueryResponse>> Handle(GetAllAddressQueryRequest request, CancellationToken cancellationToken)
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-            {
+            {                
                 DynamicParameters parameters = new DynamicParameters();
+                connection.Open();
                 parameters.Add("@CountryId",null);
                 parameters.Add("@CountyId",null);
                 parameters.Add("@DistrictId",null);
                 parameters.Add("@StateId",null);
                 var result = connection.Query<GetAllAddressQueryResponse>("GetAddress",parameters,commandType:CommandType.StoredProcedure).ToList();
+                connection.Close();
                 return new List<GetAllAddressQueryResponse>(result);
             }
         }

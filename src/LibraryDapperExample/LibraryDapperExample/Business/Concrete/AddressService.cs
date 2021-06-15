@@ -40,6 +40,15 @@ namespace LibraryDapperExample.Business.Concrete
             return new Result<DeleteAddressCommandResponse>(true);
         }
 
+        public async Task<IResult<GetAddressByIdQueryResponse>> Get(GetAddressByIdQueryRequest requestModel)
+        {
+            if (requestModel.CountryId == Guid.Empty && requestModel.CountyId == Guid.Empty && requestModel.DistrictId == Guid.Empty && requestModel.StateId == Guid.Empty)
+                return new Result<GetAddressByIdQueryResponse>(false);
+           var result = await _mediatR.Send(requestModel);
+            if(result == null) return new Result<GetAddressByIdQueryResponse>(false);
+            return new Result<GetAddressByIdQueryResponse>(true, result);
+        }
+
         public async Task<IResult<List<GetAllAddressQueryResponse>>> GetAll(GetAllAddressQueryRequest requestModel)
         {
            var result = await _mediatR.Send(requestModel);

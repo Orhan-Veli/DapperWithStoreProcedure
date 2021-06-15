@@ -45,7 +45,16 @@ namespace LibraryDapperExample.Controllers
         public async Task<IActionResult> GetAll(GetAllAddressQueryRequest request)
         {
             var result = await _addressService.GetAll(request);
-            return Ok(result);
+            return Ok(result.Data);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery]GetAddressByIdQueryRequest request)
+        {
+           var result = await _addressService.Get(request);
+            if (!result.Success) return BadRequest();
+            return Ok(result.Data)
+
+        }     
     }
 }
