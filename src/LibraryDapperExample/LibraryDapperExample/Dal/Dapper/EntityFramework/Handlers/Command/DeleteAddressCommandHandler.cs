@@ -22,16 +22,17 @@ namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Handlers.Command
         public async Task<DeleteAddressCommandResponse> Handle(DeleteAddressCommandRequest request, CancellationToken cancellationToken)
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-            {
+            { 
+                connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@CountryId", request.CountryId);
                 parameters.Add("@StateId", request.StateId);
                 parameters.Add("@CountyId", request.CountyId);
-                parameters.Add("@DistrictId", request.DistrictId);
+                parameters.Add("@DistrictId", request.DistrictId);                
                 await connection.ExecuteAsync("DeleteAddress",parameters, commandType:CommandType.StoredProcedure);
+                connection.Close();
                 return new DeleteAddressCommandResponse { Success = true };
             }
-            throw new NotImplementedException();
         }
     }
 }

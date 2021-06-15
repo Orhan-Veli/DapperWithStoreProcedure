@@ -15,6 +15,8 @@ namespace LibraryDapperExample.Business.Abstract
 
         Task<IResult<UpdateAddressCommandResponse>> Update(UpdateAddressCommandRequest requestModel);
 
+        Task<IResult<DeleteAddressCommandResponse>> Delete(DeleteAddressCommandRequest requestModel);
+
 
     }
 }
