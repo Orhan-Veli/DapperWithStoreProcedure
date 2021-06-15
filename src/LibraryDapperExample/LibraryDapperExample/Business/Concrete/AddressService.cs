@@ -26,5 +26,16 @@ namespace LibraryDapperExample.Business.Concrete
             if (!result.Success) return new Result<CreateAddressCommandResponse>(false);
             return new Result<CreateAddressCommandResponse>(true);
         }
+
+        public async Task<IResult<UpdateAddressCommandResponse>> Update(UpdateAddressCommandRequest requestModel)
+        {
+            if (string.IsNullOrEmpty(requestModel.CountryName) && requestModel.CountryId == Guid.Empty &&
+               string.IsNullOrEmpty(requestModel.CountyName) && requestModel.CountyId == Guid.Empty &&
+               string.IsNullOrEmpty(requestModel.StateName) && requestModel.StateId == Guid.Empty &&
+               string.IsNullOrEmpty(requestModel.DistrictName) && requestModel.DistrictId == Guid.Empty) return new Result<UpdateAddressCommandResponse>(false);
+            var result = await _mediatR.Send(requestModel);
+            if (!result.Success) return new Result<UpdateAddressCommandResponse>(false);
+            return new Result<UpdateAddressCommandResponse>(true);
+        }
     }
 }

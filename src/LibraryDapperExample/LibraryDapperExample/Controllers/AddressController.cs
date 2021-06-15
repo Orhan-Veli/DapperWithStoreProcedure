@@ -23,5 +23,13 @@ namespace LibraryDapperExample.Controllers
             if (!result.Success) return BadRequest();
             return Ok();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromQuery]UpdateAddressCommandRequest request)
+        {
+            var result = await _addressService.Update(request);
+            if (!result.Success) return BadRequest();
+            return Ok();
+        }
     }
 }

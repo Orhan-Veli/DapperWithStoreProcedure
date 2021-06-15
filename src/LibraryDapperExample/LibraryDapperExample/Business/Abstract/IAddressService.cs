@@ -13,6 +13,8 @@ namespace LibraryDapperExample.Business.Abstract
     
         Task<IResult<CreateAddressCommandResponse>> Create(CreateAddressCommandRequest requestModel);
 
+        Task<IResult<UpdateAddressCommandResponse>> Update(UpdateAddressCommandRequest requestModel);
+
 
     }
 }
