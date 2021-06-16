@@ -37,6 +37,9 @@ namespace LibraryDapperExample
             services.AddTransient<GetBookByIdQueryHandler>();
             services.AddSingleton<IBookService, BookService>();
             services.AddSingleton<IAddressService, AddressService>();
+            services.AddSingleton<IAddressService, AddressService>();
+            services.AddSingleton<ICategoryService, CategoryService>();
+            services.AddSingleton<ICustomerService, CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
