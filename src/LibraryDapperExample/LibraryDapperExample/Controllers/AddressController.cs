@@ -53,7 +53,7 @@ namespace LibraryDapperExample.Controllers
         {
            var result = await _addressService.Get(request);
             if (!result.Success) return BadRequest();
-            return Ok(result.Data)
+            return Ok(result.Data);
 
         }     
     }

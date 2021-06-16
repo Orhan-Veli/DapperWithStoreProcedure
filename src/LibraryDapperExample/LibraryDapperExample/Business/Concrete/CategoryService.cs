@@ -1,6 +1,8 @@
 ﻿using LibraryDapperExample.Business.Abstract;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Response;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Response;
 using LibraryDapperExample.Utilities.Abstract;
 using LibraryDapperExample.Utilities.Concrete;
 using MediatR;
@@ -28,6 +30,21 @@ namespace LibraryDapperExample.Business.Concrete
             if (request == null || request.Id == Guid.Empty) return new Result<DeleteCategoryCommandResponse>(false);
             await _mediator.Send(request);
             return new Result<DeleteCategoryCommandResponse>(true);
+        }
+
+        public async Task<IResult<GetCategoryByIdQueryResponse>> Get(GetCategoryByIdQueryRequest request)
+        {
+            if (request.Id == Guid.Empty) return new Result<GetCategoryByIdQueryResponse>(false);
+            var result = await _mediator.Send(request);
+            if (result == null) return new Result<GetCategoryByIdQueryResponse>(false);
+            return new Result<GetCategoryByIdQueryResponse>(true,result);
+        }
+
+        public async Task<IResult<List<GetAllCategoryQueryResponse>>> GetAll(GetAllCategoryQueryRequest request)
+        {
+          var result = await _mediator.Send(request);
+            if (result == null || result.Count == 0) return new Result<List<GetAllCategoryQueryResponse>>(false);
+            return new Result<List<GetAllCategoryQueryResponse>>(true,result);
         }
 
         public async Task<IResult<UpdateCategoryCommandResponse>> Update(UpdateCategoryCommandRequest request)
