@@ -11,5 +11,7 @@ namespace LibraryDapperExample.Business.Abstract
     public interface ICustomerService
     {
         Task<IResult<CreateCustomerCommandResponse>> Create(CreateCustomerCommandRequest request);
+
+        Task<IResult<DeleteCustomerCommandResponse>> Delete(DeleteCustomerCommandRequest response);
     }
 }
