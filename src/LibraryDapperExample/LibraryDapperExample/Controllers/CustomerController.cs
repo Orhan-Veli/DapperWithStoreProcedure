@@ -1,5 +1,6 @@
 ﻿using LibraryDapperExample.Business.Abstract;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -38,6 +39,14 @@ namespace LibraryDapperExample.Controllers
             var result = await _customerService.Update(request);
             if (!result.Success) return BadRequest();
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] GetCustomerByIdQueryRequest request)
+        {
+            var result = await _customerService.Get(request);
+            if (!result.Success) return BadRequest();
+            return Ok(result);
         }
     }
 }
