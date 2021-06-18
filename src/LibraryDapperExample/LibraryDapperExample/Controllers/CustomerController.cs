@@ -15,22 +15,29 @@ namespace LibraryDapperExample.Controllers
     {
         private readonly ICustomerService _customerService;
         public CustomerController(ICustomerService customerService) => _customerService = customerService;
-        
+
         [HttpPost]
-        public async Task<IActionResult> Create([FromQuery]CreateCustomerCommandRequest request)
+        public async Task<IActionResult> Create([FromQuery] CreateCustomerCommandRequest request)
         {
-           var result = await _customerService.Create(request);
+            var result = await _customerService.Create(request);
             if (!result.Success) return BadRequest();
             return Ok();
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromQuery]DeleteCustomerCommandRequest request)
+        public async Task<IActionResult> Delete([FromQuery] DeleteCustomerCommandRequest request)
         {
             var result = await _customerService.Delete(request);
             if (!result.Success) return BadRequest();
             return NoContent();
+        }
 
-        }        
+        [HttpPut]
+        public async Task<IActionResult> Update([FromQuery] UpdateCustomerCommandRequest request)
+        {
+            var result = await _customerService.Update(request);
+            if (!result.Success) return BadRequest();
+            return Ok();
+        }
     }
 }
