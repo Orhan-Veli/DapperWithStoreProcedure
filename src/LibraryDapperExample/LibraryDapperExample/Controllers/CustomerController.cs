@@ -48,5 +48,12 @@ namespace LibraryDapperExample.Controllers
             if (!result.Success) return BadRequest();
             return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll([FromQuery] GetAllCustomerQueryRequest request)
+        {
+            var result = await _customerService.GetAll(request);
+            return Ok(result);
+        }
     }
 }

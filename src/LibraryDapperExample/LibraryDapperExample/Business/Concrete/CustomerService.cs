@@ -46,6 +46,12 @@ namespace LibraryDapperExample.Business.Concrete
             return new Result<GetCustomerByIdQueryResponse>(true,result);
         }
 
+        public async Task<IResult<List<GetAllCustomerQueryResponse>>> GetAll(GetAllCustomerQueryRequest response)
+        {
+            var result = await _mediator.Send(response);
+            return new Result<List<GetAllCustomerQueryResponse>>(true,result);
+        }
+
         public async Task<IResult<UpdateCustomerCommandResponse>> Update(UpdateCustomerCommandRequest response)
         {
             if (response == null || response.Id == Guid.Empty || string.IsNullOrEmpty(response.LastName) || string.IsNullOrEmpty(response.Name)) return new Result<UpdateCustomerCommandResponse>(false);

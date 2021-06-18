@@ -16,5 +16,6 @@ namespace LibraryDapperExample.Business.Abstract
         Task<IResult<DeleteCustomerCommandResponse>> Delete(DeleteCustomerCommandRequest response);
         Task<IResult<UpdateCustomerCommandResponse>> Update(UpdateCustomerCommandRequest response);
         Task<IResult<GetCustomerByIdQueryResponse>> Get(GetCustomerByIdQueryRequest response);
+        Task<IResult<List<GetAllCustomerQueryResponse>>> GetAll(GetAllCustomerQueryRequest response);
     }
 }
