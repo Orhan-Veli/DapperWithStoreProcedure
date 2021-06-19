@@ -30,6 +30,13 @@ namespace LibraryDapperExample.Controllers
             if (!result.Success) return BadRequest();
             return Ok();
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(DeleteManagerCommandRequest request)
+        {
+            var result = await _managerService.Delete(request);
+            if (!result.Success) return BadRequest();
+            return Ok();
+        }
 
         
     }
