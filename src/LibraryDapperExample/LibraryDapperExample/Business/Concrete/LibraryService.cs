@@ -1,6 +1,8 @@
 ﻿using LibraryDapperExample.Business.Abstract;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Response;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Response;
 using LibraryDapperExample.Utilities.Abstract;
 using LibraryDapperExample.Utilities.Concrete;
 using MediatR;
@@ -29,6 +31,14 @@ namespace LibraryDapperExample.Business.Concrete
             var result = await _mediator.Send(request);
             if(!result.Success) return new Result<DeleteLibraryCommandResponse>(false);
             return new Result<DeleteLibraryCommandResponse>(true);
+        }
+
+        public async Task<IResult<GetLibraryByIdQueryResponse>> Get(GetLibraryByIdQueryRequest request)
+        {
+            if (request == null || request.Id == Guid.Empty) return new Result<GetLibraryByIdQueryResponse>(false);
+            var result = await _mediator.Send(request);
+            if (result == null || string.IsNullOrEmpty(result.Name)) return new Result<GetLibraryByIdQueryResponse>(false);
+            return new Result<GetLibraryByIdQueryResponse>(true);
         }
 
         public async Task<IResult<UpdateLibraryCommandResponse>> Update(UpdateLibraryCommandRequest request)
