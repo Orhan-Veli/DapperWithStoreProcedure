@@ -22,5 +22,13 @@ namespace LibraryDapperExample.Business.Concrete
             if(!result.Success) return new Result<CreateLibraryCommandResponse>(false);
             return new Result<CreateLibraryCommandResponse>(true);
         }
+
+        public async Task<IResult<DeleteLibraryCommandResponse>> Delete(DeleteLibraryCommandRequest request)
+        {
+            if (request == null || request.Id == Guid.Empty) return new Result<DeleteLibraryCommandResponse>(false);
+            var result = await _mediator.Send(request);
+            if(!result.Success) return new Result<DeleteLibraryCommandResponse>(false);
+            return new Result<DeleteLibraryCommandResponse>(true);
+        }
     }
 }
