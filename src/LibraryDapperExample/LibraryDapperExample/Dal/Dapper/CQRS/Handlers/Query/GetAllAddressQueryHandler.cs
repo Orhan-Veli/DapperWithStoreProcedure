@@ -28,7 +28,7 @@ namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Handlers.Query
                 parameters.Add("@CountyId",null);
                 parameters.Add("@DistrictId",null);
                 parameters.Add("@StateId",null);
-                var result = connection.Query<GetAllAddressQueryResponse>("GetAddress",parameters,commandType:CommandType.StoredProcedure).ToList();
+                var result =  connection.Query<GetAllAddressQueryResponse>("GetAddress",parameters,commandType:CommandType.StoredProcedure).ToList();
                 connection.Close();
                 return new List<GetAllAddressQueryResponse>(result);
             }

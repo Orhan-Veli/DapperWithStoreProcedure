@@ -31,15 +31,15 @@ namespace LibraryDapperExample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddTransient<CreateBookCommandHandler>();
-            services.AddTransient<GetAllBookQueryHandler>();
-            services.AddTransient<GetBookByIdQueryHandler>();
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());            
             services.AddSingleton<IBookService, BookService>();
             services.AddSingleton<IAddressService, AddressService>();
             services.AddSingleton<IAddressService, AddressService>();
             services.AddSingleton<ICategoryService, CategoryService>();
             services.AddSingleton<ICustomerService, CustomerService>();
+            services.AddSingleton<ILibraryService, LibraryService>();
+            services.AddSingleton<IManagerService, ManagerService>();
+            services.AddSingleton<IWriterService, WriterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

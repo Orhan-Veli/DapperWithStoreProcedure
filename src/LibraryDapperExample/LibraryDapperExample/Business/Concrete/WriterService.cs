@@ -44,7 +44,7 @@ namespace LibraryDapperExample.Business.Concrete
         public async Task<IResult<List<GetAllWriterQueryResponse>>> GetAll(GetAllWriterQueryRequest request)
         {
             var result = await _mediator.Send(request);
-            return new Result<GetAllWriterQueryResponse>(true, result);
+            return new Result<List<GetAllWriterQueryResponse>>(true, result);
 
         }
 
