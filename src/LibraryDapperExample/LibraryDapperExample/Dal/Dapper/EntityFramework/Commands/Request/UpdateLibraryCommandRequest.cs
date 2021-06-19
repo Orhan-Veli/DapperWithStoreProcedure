@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request
 {
-    public class DeleteLibraryCommandRequest : ICommandRequest<DeleteLibraryCommandResponse>
+    public class UpdateLibraryCommandRequest : ICommandRequest<UpdateLibraryCommandResponse>
     {
         public Guid Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

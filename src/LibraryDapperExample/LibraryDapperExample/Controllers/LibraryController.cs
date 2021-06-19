@@ -17,7 +17,7 @@ namespace LibraryDapperExample.Controllers
         public LibraryController(ILibraryService libraryService) => _libraryService = libraryService;
         
         [HttpPost]
-        public async Task<IActionResult> Create(CreateLibraryCommandRequest request)
+        public async Task<IActionResult> Create([FromQuery]CreateLibraryCommandRequest request)
         {
             var result = await _libraryService.Create(request);
             if (!result.Success) return BadRequest();
@@ -25,11 +25,19 @@ namespace LibraryDapperExample.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(DeleteLibraryCommandRequest request)
+        public async Task<IActionResult> Delete([FromQuery]DeleteLibraryCommandRequest request)
         {
             var result = await _libraryService.Delete(request);
             if (!result.Success) return BadRequest();
             return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromQuery]UpdateLibraryCommandRequest request)
+        {
+            var result = await _libraryService.Update(request);
+            if (!result.Success) return BadRequest();
+            return Ok();
         }
     }
 }
