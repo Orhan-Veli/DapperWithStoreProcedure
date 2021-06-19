@@ -15,8 +15,8 @@ namespace LibraryDapperExample.Business.Concrete
 {
     public class LibraryService : ILibraryService
     {
-        private readonly Mediator _mediator;
-        public LibraryService(Mediator mediator) => _mediator = mediator;
+        private readonly IMediator _mediator;
+        public LibraryService(IMediator mediator) => _mediator = mediator;
         public async Task<IResult<CreateLibraryCommandResponse>> Create(CreateLibraryCommandRequest request)
         {
             if (request == null || request.Id == Guid.Empty || string.IsNullOrEmpty(request.Name)) return new Result<CreateLibraryCommandResponse>(false);

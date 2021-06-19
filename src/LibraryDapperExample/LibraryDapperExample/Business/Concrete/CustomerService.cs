@@ -15,9 +15,9 @@ namespace LibraryDapperExample.Business.Concrete
 {
     public class CustomerService : ICustomerService
     {
-        private readonly Mediator _mediator;
+        private readonly IMediator _mediator;
 
-        public CustomerService(Mediator mediator) => _mediator = mediator;
+        public CustomerService(IMediator mediator) => _mediator = mediator;
 
         public async Task<IResult<CreateCustomerCommandResponse>> Create(CreateCustomerCommandRequest request)
         {

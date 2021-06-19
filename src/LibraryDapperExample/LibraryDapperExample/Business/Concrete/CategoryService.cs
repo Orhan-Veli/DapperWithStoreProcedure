@@ -15,8 +15,8 @@ namespace LibraryDapperExample.Business.Concrete
 {
     public class CategoryService : ICategoryService
     {
-        private readonly Mediator _mediator;
-        public CategoryService(Mediator mediator) => _mediator = mediator;
+        private readonly IMediator _mediator;
+        public CategoryService(IMediator mediator) => _mediator = mediator;
         
         public async Task<IResult<CreateCategoryCommandResponse>> Create(CreateCategoryCommandRequest request)
         {

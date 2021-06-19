@@ -1,11 +1,14 @@
-﻿using System;
+﻿using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Response;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request
 {
-    public class DeleteManagerCommandRequest
+    public class DeleteManagerCommandRequest : ICommandRequest<DeleteManagerCommandResponse>
     {
+        public Guid Id { get; set; }
     }
 }
