@@ -1,6 +1,8 @@
 ﻿using LibraryDapperExample.Business.Abstract;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Request;
 using LibraryDapperExample.Dal.Dapper.EntityFramework.Commands.Response;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request;
+using LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Response;
 using LibraryDapperExample.Utilities.Abstract;
 using LibraryDapperExample.Utilities.Concrete;
 using MediatR;
@@ -30,6 +32,13 @@ namespace LibraryDapperExample.Business.Concrete
            var result = await _mediator.Send(request);
             if(!result.Success) return new Result<DeleteWriterCommandResponse>(false);
             return new Result<DeleteWriterCommandResponse>(true);
+        }
+
+        public async Task<IResult<GetWriterByIdQueryResponse>> Get(GetWriterByIdQueryRequest request)
+        {
+            if (request == null || request.Id == Guid.Empty) return new Result<GetWriterByIdQueryResponse>(false);
+            var result = await _mediator.Send(request);
+            return new Result<GetWriterByIdQueryResponse>(true,result);
         }
 
         public async Task<IResult<UpdateWriterCommandResponse>> Update(UpdateWriterCommandRequest request)
