@@ -11,5 +11,6 @@ namespace LibraryDapperExample.Business.Abstract
     public interface IWriterService
     {
         Task<IResult<CreateWriterCommandResponse>> Create(CreateWriterCommandRequest request);
+        Task<IResult<UpdateWriterCommandResponse>> Update(UpdateWriterCommandRequest request);
     }
 }
