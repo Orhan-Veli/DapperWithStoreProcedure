@@ -13,24 +13,23 @@ using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Handlers.Command
 {
-    public class CreateManagerCommandHandler : ICommandRequestHandler<CreateManagerCommandRequest, CreateManagerCommandResponse>
+    public class CreateWriterCommandHandler : ICommandRequestHandler<CreateWriterCommandRequest, CreateWriterCommandResponse>
     {
         private readonly IConfiguration _configuration;
-        public CreateManagerCommandHandler(IConfiguration configuration) => _configuration = configuration;
-
-        public async Task<CreateManagerCommandResponse> Handle(CreateManagerCommandRequest request, CancellationToken cancellationToken)
+        public CreateWriterCommandHandler(IConfiguration configuration) => _configuration = configuration;
+ 
+        public async Task<CreateWriterCommandResponse> Handle(CreateWriterCommandRequest request, CancellationToken cancellationToken)
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Name",request.Name);
-                parameters.Add("@LastName",request.LastName);
-                parameters.Add("@LibraryId",request.LibraryId);
+                parameters.Add("@LastName", request.LastName);
                 parameters.Add("@AddressId",request.AddressId);
-                await connection.ExecuteAsync("CreateManagers",parameters,commandType: CommandType.StoredProcedure);
+                await connection.ExecuteAsync("CreateWriters",parameters,commandType: CommandType.StoredProcedure);
                 connection.Close();
-                return new CreateManagerCommandResponse { Success = true };
+                return new CreateWriterCommandResponse { Success = true };
             }
         }
     }

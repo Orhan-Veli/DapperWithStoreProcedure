@@ -16,7 +16,7 @@ namespace LibraryDapperExample.Business.Abstract
         Task<IResult<UpdateManagerCommandResponse>> Update(UpdateManagerCommandRequest request);
         Task<IResult<DeleteManagerCommandResponse>> Delete(DeleteManagerCommandRequest request);
         Task<IResult<GetManagerByIdQueryResponse>> Get(GetManagerByIdQueryRequest request);
-        Task<IResult<GetAllManagerQueryResponse>> GetAll(GetAllManagerQueryRequest request);
+        Task<IResult<List<GetAllManagerQueryResponse>>> GetAll(GetAllManagerQueryRequest request);
 
 
     }
