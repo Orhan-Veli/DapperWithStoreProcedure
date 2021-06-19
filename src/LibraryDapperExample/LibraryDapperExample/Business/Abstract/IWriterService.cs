@@ -12,5 +12,6 @@ namespace LibraryDapperExample.Business.Abstract
     {
         Task<IResult<CreateWriterCommandResponse>> Create(CreateWriterCommandRequest request);
         Task<IResult<UpdateWriterCommandResponse>> Update(UpdateWriterCommandRequest request);
+        Task<IResult<DeleteWriterCommandResponse>> Delete(DeleteWriterCommandRequest request);
     }
 }
