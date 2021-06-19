@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Request
 {
-    public class GetLibraryByIdCommandRequest : IQueryRequest<GetLibraryByIdCommandResponse>
+    public class GetLibraryByIdQueryRequest : IQueryRequest<GetLibraryByIdQueryResponse>
     {
         public Guid Id { get; set; }
     }

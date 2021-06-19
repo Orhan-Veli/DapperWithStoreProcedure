@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Queries.Response
 {
-    public class GetLibraryByIdCommandResponse
+    public class GetLibraryByIdQueryResponse
     {
         public string Name { get; set; }
     }
