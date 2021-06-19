@@ -53,5 +53,10 @@ namespace LibraryDapperExample.Business.Concrete
             if(!result.Success) return new Result<UpdateManagerCommandResponse>(false);
             return new Result<UpdateManagerCommandResponse>(true);
         }
+        public async Task<IResult<List<GetAllManagerQueryResponse>>> GetAll(GetAllManagerQueryRequest request)
+        {
+            var result = await _mediator.Send(request);
+            return new Result<List<GetAllManagerQueryResponse>>(true,result);
+        }
     }
 }
