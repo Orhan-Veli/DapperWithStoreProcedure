@@ -26,5 +26,14 @@ namespace LibraryDapperExample.Business.Concrete
             if(!result.Success) return new Result<CreateManagerCommandResponse>(false);
             return new Result<CreateManagerCommandResponse>(true);
         }
+
+        public async Task<IResult<UpdateManagerCommandResponse>> Update(UpdateManagerCommandRequest request)
+        {
+            if (request == null || request.Id == Guid.Empty || request.LibraryId == Guid.Empty || string.IsNullOrEmpty(request.LastName) || string.IsNullOrEmpty(request.Name))
+                return new Result<UpdateManagerCommandResponse>(false);
+            var result = await _mediator.Send(request);
+            if(!result.Success) return new Result<UpdateManagerCommandResponse>(false);
+            return new Result<UpdateManagerCommandResponse>(true);
+        }
     }
 }
