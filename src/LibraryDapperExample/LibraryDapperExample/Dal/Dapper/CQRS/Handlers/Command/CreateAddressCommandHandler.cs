@@ -20,7 +20,7 @@ namespace LibraryDapperExample.Dal.Dapper.EntityFramework.Handlers.Command
         public async Task<CreateAddressCommandResponse> Handle(CreateAddressCommandRequest request, CancellationToken cancellationToken)
         {
             using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-            {
+            {                
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@CountryName", request.CountryName);
                 parameters.Add("@StateName", request.StateName);

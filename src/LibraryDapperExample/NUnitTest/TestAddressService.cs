@@ -20,19 +20,19 @@ namespace NUnitTest
     [TestFixture]
     class TestAddressService
     {
-        [TestCase("a","a","a","a")]
-        [TestCase("a", "", "a", "a")]
-        [TestCase("", "a", "a", "a")]
-        [TestCase("a", "a", "", "a")]
-        [TestCase("a", "a", "a", "")]
-        public async Task CreateAddressTest_ReturnsTrue(string a,string b,string c,string d)
+        [TestCase("CountryName", "CountyName", "StateName", "DistrictName")]
+        [TestCase("", "CountyName", "StateName", "DistrictName")]
+        [TestCase("CountryName", "", "StateName", "DistrictName")]
+        [TestCase("CountryName", "CountyName", "", "DistrictName")]
+        [TestCase("CountryName", "CountyName", "StateName", "")]
+        public async Task CreateAddressTest_ReturnsTrue(string CountryName, string CountyName, string StateName, string DistrictName)
         {
             CreateAddressCommandRequest request = new CreateAddressCommandRequest
             {
-                CountryName = a,
-                CountyName = b,
-                DistrictName = c,              
-                StateName = d
+                CountryName = CountryName,
+                CountyName = CountyName,
+                DistrictName = DistrictName,              
+                StateName = StateName
             };
             var fakeMediator = new Mock<IMediator>();
             fakeMediator.Setup(x => x.Send(It.IsAny<CreateAddressCommandRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(new CreateAddressCommandResponse {Success = true });
@@ -43,14 +43,14 @@ namespace NUnitTest
 
         [TestCase("", "", "", "")]
         [TestCase(null, null, null, null)]
-        public async Task CreateAddressTest_ReturnsFalse(string a, string b, string c, string d)
+        public async Task CreateAddressTest_ReturnsFalse(string CountryName, string CountyName, string StateName, string DistrictName)
         {
             CreateAddressCommandRequest request = new CreateAddressCommandRequest
             {
-                CountryName = a,
-                CountyName = b,
-                DistrictName = c,
-                StateName = d
+                CountryName = CountryName,
+                CountyName = CountyName,
+                DistrictName = DistrictName,
+                StateName = StateName
             };
             var fakeMediator = new Mock<IMediator>();
             fakeMediator.Setup(x => x.Send(It.IsAny<CreateAddressCommandRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(new CreateAddressCommandResponse { Success = true });
@@ -58,5 +58,50 @@ namespace NUnitTest
             var data = await addressService.Create(request);
             Assert.AreEqual(false, data.Success);
         }
+
+        public const string guid = "{ccae2079-2ebc-4200-879d-866fc82e6afa}";
+        public const string empty = "{00000000-0000-0000-0000-000000000000}";
+                [TestCase(guid, guid, guid, guid)]
+        //[Test, TestCase("EmptyGuid", "TestGuid", "TestGuid", "TestGuid")]
+        //[Test, TestCase("TestGuid", "EmptyGuid", "TestGuid", "TestGuid")]
+        //[Test, TestCase("TestGuid", "TestGuid", "EmptyGuid", "TestGuid")]
+        //[Test, TestCase("TestGuid", "TestGuid", "TestGuid", "EmptyGuid")]
+        public async Task DeleteAddressTest_ReturnsTrue(Guid CountryId, Guid CountyId, Guid DistrictId, Guid StateId)
+        {
+            DeleteAddressCommandRequest request = new DeleteAddressCommandRequest
+            {
+                CountryId = CountryId,
+                CountyId = CountyId,
+                DistrictId = DistrictId,
+                StateId = StateId
+            };
+            var fakeMediator = new Mock<IMediator>();
+            fakeMediator.Setup(x => x.Send(It.IsAny<DeleteAddressCommandRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(new DeleteAddressCommandResponse { Success = true });
+            var addressService = new AddressService(fakeMediator.Object);
+            var data = await addressService.Delete(request);
+            Assert.AreEqual(true, data.Success);
+        }
+
+        [TestCase(empty, empty, empty, empty)]
+        [TestCase(null, null, null, null)]
+        public async Task DeleteAddressTest_ReturnsFalse(Guid CountryId, Guid CountyId, Guid DistrictId, Guid StateId)
+        {
+            DeleteAddressCommandRequest request = new DeleteAddressCommandRequest
+            {
+                CountryId = CountryId,
+                CountyId = CountyId,
+                DistrictId = DistrictId,
+                StateId = StateId
+            };
+            var fakeMediator = new Mock<IMediator>();
+            fakeMediator.Setup(x => x.Send(It.IsAny<DeleteAddressCommandRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(new DeleteAddressCommandResponse { Success = true });
+            var addressService = new AddressService(fakeMediator.Object);
+            var data = await addressService.Delete(request);
+            Assert.AreEqual(false, data.Success);
+        }
+
+
+
+
     }
 }
