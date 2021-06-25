@@ -135,9 +135,9 @@ namespace NUnitTest
             Assert.AreEqual(true, data.Success);
         }
 
-        [TestCase("a", guid, "a", guid, "a", guid, "a", guid)]
-        [TestCase("", guid, "", guid, "", guid, "", guid)]
-        [TestCase("a", empty, "a", empty, "a", empty, "a", empty)]        
+        
+      
+        [TestCase("", empty, "", empty, "", empty, "", empty)]        
         public async Task UpdateAddressTest_ReturnsFalse(string CountryName, Guid CountryId, string CountyName, Guid CountyId, string DistrictName, Guid DistrictId, string StateName, Guid StateId)
         {
             UpdateAddressCommandRequest requestModel = new UpdateAddressCommandRequest
@@ -157,6 +157,32 @@ namespace NUnitTest
             var data = await addressService.Update(requestModel);
             Assert.AreEqual(false, data.Success);
         }
+
+        [TestCase(guid)]
+        public async Task GetAddressTest_ReturnsTrue(Guid id)
+        {
+            GetAddressByIdQueryRequest request = new GetAddressByIdQueryRequest { CountryId = id, CountyId = id, DistrictId = id, StateId = id };
+            GetAddressByIdQueryResponse getAllAddressQueryResponses = new GetAddressByIdQueryResponse();           
+            var fakeMediator = new Mock<IMediator>();
+            fakeMediator.Setup(x => x.Send(It.IsAny<GetAddressByIdQueryRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(getAllAddressQueryResponses);
+            var addressService = new AddressService(fakeMediator.Object);
+            var data = await addressService.Get(request);
+            Assert.AreEqual(true, data.Success);
+        }
+
+        [TestCase(empty)]
+        public async Task GetAddressTest_ReturnsFalse(Guid id)
+        {
+            GetAddressByIdQueryRequest request = new GetAddressByIdQueryRequest { CountryId = id, CountyId = id, DistrictId = id, StateId = id };
+            GetAddressByIdQueryResponse getAllAddressQueryResponses = new GetAddressByIdQueryResponse();
+            var fakeMediator = new Mock<IMediator>();
+            fakeMediator.Setup(x => x.Send(It.IsAny<GetAddressByIdQueryRequest>(), It.IsAny<CancellationToken>())).ReturnsAsync(getAllAddressQueryResponses);
+            var addressService = new AddressService(fakeMediator.Object);
+            var data = await addressService.Get(request);
+            Assert.AreEqual(false, data.Success);
+        }
+
+
 
     }
 }
