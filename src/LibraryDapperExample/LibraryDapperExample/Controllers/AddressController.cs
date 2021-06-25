@@ -15,8 +15,8 @@ namespace LibraryDapperExample.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IAddressService _addressService;
-        public AddressController(IAddressService addressService) => _addressService = addressService;
-
+        public AddressController(IAddressService addressService) => _addressService = addressService;      
+       
         [HttpPost]
         public async Task<IActionResult> Create([FromQuery] CreateAddressCommandRequest request)
         {

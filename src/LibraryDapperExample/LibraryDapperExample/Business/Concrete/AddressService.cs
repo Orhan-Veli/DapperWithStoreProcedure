@@ -25,7 +25,7 @@ namespace LibraryDapperExample.Business.Concrete
                 string.IsNullOrEmpty(requestModel.StateName) &&
                 string.IsNullOrEmpty(requestModel.DistrictName)) return new Result<CreateAddressCommandResponse>(false);
             var result = await _mediatR.Send(requestModel);
-            if (!result.Success) return new Result<CreateAddressCommandResponse>(false);
+            if (result == null || !result.Success) return new Result<CreateAddressCommandResponse>(false);
             return new Result<CreateAddressCommandResponse>(true);
         }
 
